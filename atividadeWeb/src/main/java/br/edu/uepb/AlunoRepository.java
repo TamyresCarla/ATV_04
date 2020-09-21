@@ -11,6 +11,7 @@ public class AlunoRepository  {
 
     // simulando nossa base de dados
     private static HashMap<Integer, Aluno> alunos = new HashMap<>();
+    Aluno aluno = new Aluno();
 
     // métodos para manipular
     public List<Aluno> getAll() {

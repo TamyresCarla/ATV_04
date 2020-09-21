@@ -27,8 +27,8 @@ public class AlunoResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createPessoa(final Aluno p) {
-        alunoRepository.create(p);
+    public Response createPessoa(final Aluno aluno) {
+        alunoRepository.create(aluno);
         return Response.status(Response.Status.CREATED).entity(aluno).build();
     }
 
@@ -43,7 +43,7 @@ public class AlunoResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response editPessoa(@PathParam("id") final int id, final Aluno pessoa) {
+    public Response editPessoa(@PathParam("id") final int id, final Aluno aluno) {
         final Aluno p = alunoRepository.getById(id);
         if (p == null)
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -65,7 +65,7 @@ public class AlunoResource {
         if (p == null)
             return Response.status(Response.Status.NOT_FOUND).build();
         try {
-            alunoRepository.delete(aluno);
+            alunoRepository.delete(id);
             return Response.noContent().build();
         } catch (final Exception ex) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(ex.getMessage()).build();

@@ -11,16 +11,17 @@ public class TurmaRepository  {
 
     // simulando nossa base de dados
     private static HashMap<Integer, Turma> turmas = new HashMap<>();
+    Turma turma = new Turma();
 
     // métodos para manipular
     public List<Turma> getAll() {
         return new ArrayList<Turma>(turmas.values());
     }
 
-    public void create(final Turma p) {
-        if (p.getId() == 0)
-            p.setId(generateId(turmas.size() + 1));
-        turmas.put(turmas.getId(), p);
+    public void create(final Turma turma) {
+        if (turma.getId() == 0)
+            turma.setId(generateId(turmas.size() + 1));
+        turmas.put(turma.getId(), turma);
     }
 
     private int generateId(final int possible) {
@@ -33,9 +34,9 @@ public class TurmaRepository  {
         return turmas.get(id);
     }
 
-    public void edit(final Turma p) {
-        turmas.remove(p.getId());
-        turmas.put(p.getId(), p);
+    public void edit(final Turma turma) {
+        turmas.remove(turma.getId());
+        turmas.put(turma.getId(), turma);
     }
 
     public void delete(final int id) {
