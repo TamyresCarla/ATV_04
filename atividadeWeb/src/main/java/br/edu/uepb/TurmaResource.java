@@ -17,19 +17,19 @@ import jakarta.ws.rs.core.Response;
 @Path("Turmas") // rota do resource
 public class TurmaResource {
 
-    private final TurmaRepository TurmaRepository = new TurmaRepository();
+    private final TurmaRepository turmaRepository = new TurmaRepository();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPessoas() { // response status code 200
-        return Response.ok(TurmaRepository.getAll()).build();
+        return Response.ok(turmaRepository.getAll()).build();
     }
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response createPessoa(final Turma turma) {
-        TurmaRepository.create(turma);
+        turmaRepository.create(turma);
         return Response.status(Response.Status.CREATED).entity(turma).build();
     }
 
@@ -37,7 +37,7 @@ public class TurmaResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPessoaById(@PathParam("id") final int id) {
-        return Response.ok(TurmaRepository.getById(id)).build();
+        return Response.ok(turmaRepository.getById(id)).build();
     }
 
     @PUT
@@ -45,12 +45,12 @@ public class TurmaResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response editPessoa(@PathParam("id") final int id, final Turma turma) {
-        final Turma p = TurmaRepository.getById(id);
+        final Turma p = turmaRepository.getById(id);
         if (p == null)
             return Response.status(Response.Status.NOT_FOUND).build();
         try {
             turma.setId(id);
-            TurmaRepository.edit(turma);
+            turmaRepository.edit(turma);
             return Response.ok(turma).build();
         } catch (final Exception ex) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(ex.getMessage()).build();
@@ -62,11 +62,11 @@ public class TurmaResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response deletePessoa(@PathParam("id") final int id, final Turma turma ) {
-        final Turma p = TurmaRepository.getById(id);
+        final Turma p = turmaRepository.getById(id);
         if (p == null)
             return Response.status(Response.Status.NOT_FOUND).build();
         try {
-            TurmaRepository.delete(id);
+            turmaRepository.delete(id);
             return Response.noContent().build();
         } catch (final Exception ex) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(ex.getMessage()).build();

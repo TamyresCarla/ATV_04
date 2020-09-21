@@ -15,7 +15,7 @@ public class TurmaRepository  {
 
     // métodos para manipular
     public List<Turma> getAll() {
-        return new ArrayList<Turma>(turmas.values());
+        return new ArrayList<>(turmas.values());
     }
 
     public void create(final Turma turma) {

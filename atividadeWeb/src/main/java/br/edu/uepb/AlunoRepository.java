@@ -15,7 +15,7 @@ public class AlunoRepository  {
 
     // métodos para manipular
     public List<Aluno> getAll() {
-        return new ArrayList<Aluno>(alunos.values());
+        return new ArrayList<>(alunos.values());
     }
 
     public void create(Aluno p) {
