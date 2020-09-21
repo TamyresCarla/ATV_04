@@ -28,9 +28,9 @@ public class TurmaResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response createPessoa(final Turma p) {
-        TurmaRepository.create(p);
-        return Response.status(Response.Status.CREATED).entity(Turma).build();
+    public Response createPessoa(final Turma turma) {
+        TurmaRepository.create(turma);
+        return Response.status(Response.Status.CREATED).entity(turma).build();
     }
 
     @GET
@@ -44,14 +44,14 @@ public class TurmaResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response editPessoa(@PathParam("id") final int id, final Turma pessoa) {
+    public Response editPessoa(@PathParam("id") final int id, final Turma turma) {
         final Turma p = TurmaRepository.getById(id);
         if (p == null)
             return Response.status(Response.Status.NOT_FOUND).build();
         try {
-            Turma.setId(id);
-            TurmaRepository.edit(Turma);
-            return Response.ok(Turma).build();
+            turma.setId(id);
+            TurmaRepository.edit(turma);
+            return Response.ok(turma).build();
         } catch (final Exception ex) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(ex.getMessage()).build();
         }
@@ -61,12 +61,12 @@ public class TurmaResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response deletePessoa(@PathParam("id") final int id, final Turma Turma ) {
+    public Response deletePessoa(@PathParam("id") final int id, final Turma turma ) {
         final Turma p = TurmaRepository.getById(id);
         if (p == null)
             return Response.status(Response.Status.NOT_FOUND).build();
         try {
-            TurmaRepository.delete(Turma);
+            TurmaRepository.delete(id);
             return Response.noContent().build();
         } catch (final Exception ex) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(ex.getMessage()).build();
